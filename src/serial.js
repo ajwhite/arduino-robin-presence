@@ -13,14 +13,4 @@ export function createObservableSerialPort (serialPort) {
   return RxNode.fromReadableStream(serialPort)
     .map(buffer => parseInt(buffer.toString()))
     .filter(distance => !isNaN(distance));
-
-  serialPort.open(error => {
-    if (error) {
-      throw error;
-    }
-    serialPort.on('data', buffer => {
-      var distance = parseInt(buffer.toString());
-      console.log('distance', distance);
-    });
-  });
 }
